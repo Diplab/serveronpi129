@@ -4,10 +4,10 @@ import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
 
 import com.diplab.device.RpiCO2;
-import com.diplab.service.CO2Service129;
+import com.diplab.service.CO2Service;
 
 @WebService(endpointInterface = "com.diplab.service.CO2Service129")
-public class CO2Service129Impl implements CO2Service129 {
+public class CO2ServiceImpl implements CO2Service {
 
 	@Override
 	public String sayHello(String name) {
@@ -18,7 +18,7 @@ public class CO2Service129Impl implements CO2Service129 {
 	public static void main(String[] args) {
 		System.out.println("CO2");
 		Endpoint.publish("http://0.0.0.0:9004/webservice/sayCO2",
-				new CO2Service129Impl());
+				new CO2ServiceImpl());
 	}
 
 	@Override

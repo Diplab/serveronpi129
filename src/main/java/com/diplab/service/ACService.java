@@ -7,7 +7,7 @@ import javax.jws.soap.SOAPBinding.Style;
 
 @WebService
 @SOAPBinding(style = Style.RPC)
-public interface ACService129 {
+public interface ACService {
 
 	@WebMethod
 	String sayHello(String name);

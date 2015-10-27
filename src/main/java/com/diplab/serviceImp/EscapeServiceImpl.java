@@ -1,36 +1,23 @@
 package com.diplab.serviceImp;
 
-import java.io.IOException;
-
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
 
 import com.diplab.device.RpiCO2;
+import com.diplab.device.RpiElectricLockController;
 import com.diplab.device.RpiTemperature;
 import com.diplab.device.RpiTrunLightController;
 import com.diplab.device.RunLIRC;
-import com.diplab.service.HelloService129;
+import com.diplab.service.EscapeService;
 
-@WebService(endpointInterface = "com.diplab.service.HelloService129")
-public class HelloService129Impl implements HelloService129 {
-
-	@Override
-	public String sayHello(String name) {
-		System.out.format("in sayHello: Receive %s ", name);
-		return "JAVA-WS " + name;
-	}
+@WebService(endpointInterface = "com.diplab.service.EscapeService")
+public class EscapeServiceImpl implements EscapeService {
 
 	public static void main(String[] args) {
 		System.out.println("HI");
-		Endpoint.publish("http://0.0.0.0:9005/webservice/sayHello",
-				new HelloService129Impl());
+		Endpoint.publish("http://0.0.0.0:9005/webservice/Escape",
+				new EscapeServiceImpl());
 	}
-	
-	@Override
-	public double random() {
-		return (Math.random()*26)+15;
-	}
-
 
 	@Override
 	public double CO2ppm() {
@@ -64,9 +51,21 @@ public class HelloService129Impl implements HelloService129 {
 	}
 
 	@Override
-	public double readTemperature() throws IOException {
+	public double readTemperature() {
 		return RpiTemperature.getTemperature();
 		
+	}
+
+	@Override
+	public void unlock() {
+		RpiElectricLockController.on();
+		return;
+	}
+
+	@Override
+	public void lock() {
+		RpiElectricLockController.off();
+		return;
 	}
 
 }

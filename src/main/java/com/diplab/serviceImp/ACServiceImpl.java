@@ -4,10 +4,10 @@ import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
 
 import com.diplab.device.RunLIRC;
-import com.diplab.service.ACService129;
+import com.diplab.service.ACService;
 
 @WebService(endpointInterface = "com.diplab.service.ACService129")
-public class ACService129Impl implements ACService129 {
+public class ACServiceImpl implements ACService {
 
 	@Override
 	public String sayHello(String name) {
@@ -18,7 +18,7 @@ public class ACService129Impl implements ACService129 {
 	public static void main(String[] args) {
 		System.out.println("AC");
 		Endpoint.publish("http://0.0.0.0:9003/webservice/sayAC",
-				new ACService129Impl());
+				new ACServiceImpl());
 	}
 
 	@Override

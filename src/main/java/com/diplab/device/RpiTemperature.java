@@ -2,6 +2,7 @@ package com.diplab.device;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -12,13 +13,18 @@ public class RpiTemperature {
 	private static BufferedReader br;
 	private static String filename = "28-0000051f2e41";
 	  
-	  public static double getTemperature() throws IOException{
+	  public static double getTemperature(){
 		  double value = 0;
 //		  System.out.print(filename + ": ");
 		   // Device data in w1_slave file
 		          String filePath = w1DirPath + "/" + filename + "/w1_slave";
 		          File f = new File(filePath);
-		          br = new BufferedReader(new FileReader(f));
+		          try {
+					br = new BufferedReader(new FileReader(f));
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		          try {
 		            String output = br.readLine();
 		            if (output.endsWith("YES")) {
@@ -32,7 +38,7 @@ public class RpiTemperature {
 		          catch (IOException e) {
 		              e.printStackTrace();
 		          }
-		    br.close();
+//		    br.close();
 			return value;
 	  }
 	  
