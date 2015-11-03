@@ -2,6 +2,8 @@ package com.diplab.webservice;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
+import javax.jws.soap.SOAPBinding.Style;
 import javax.xml.ws.Endpoint;
 
 import com.diplab.service.CO2Service;
@@ -19,6 +21,7 @@ import com.diplab.serviceImp.TemperatureServiceImpl;
 import com.pi4j.io.gpio.PinState;
 
 @WebService
+@SOAPBinding(style = Style.RPC)
 public class Device129 {
 
 	CO2Service co2Service = new CO2ServiceImpl();
